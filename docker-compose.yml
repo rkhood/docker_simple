@@ -1,0 +1,18 @@
+version: '3' 
+
+services:
+  euro-service:
+    build: ./euro
+    volumes:
+      - ./euro:/usr/src/app
+    ports:
+      - 9201:80
+
+  website:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - 9200:80
+    depends_on:
+      - euro-service 
